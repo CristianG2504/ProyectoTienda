@@ -4,7 +4,7 @@
  */
 package View;
 
-
+import Model.Categoria;
 import Model.Proveedor;
 
 import java.sql.SQLException;
@@ -33,18 +33,16 @@ public class CategoriaView extends javax.swing.JPanel {
 
     }
 
-    public void cargarTabla(List<Proveedor> lista) {
+    public void cargarTabla(List<Categoria> lista) {
         DefaultTableModel modelo = (DefaultTableModel) TbTabla.getModel();
 
         modelo.setRowCount(0);
 
-        for (Proveedor p : lista) {
+        for (Categoria c : lista) {
             modelo.addRow(new Object[]{
-                p.getId(),
-                p.getNombre(),
-                p.getDireccion(),
-                p.getTelefono(),
-                p.getCorreo()
+                c.getId(),
+                c.getNombre(),
+                c.getDescripcion()
             });
         }
 
@@ -53,13 +51,12 @@ public class CategoriaView extends javax.swing.JPanel {
 
     private void llenarCamposDesdeTabla() {
         int fila = TbTabla.getSelectedRow();
-        if (fila >= 0) { 
+        if (fila >= 0) {
 
             txtID.setText(TbTabla.getValueAt(fila, 0).toString());
             txtNombre.setText(TbTabla.getValueAt(fila, 1).toString());
-            txtDireccion.setText(TbTabla.getValueAt(fila, 2).toString());
-            txtDescripcion.setText(TbTabla.getValueAt(fila, 3).toString());
-            txtCorreo.setText(TbTabla.getValueAt(fila, 4).toString());
+            txtDescripcion.setText(TbTabla.getValueAt(fila, 2).toString());
+           
         }
     }
 
@@ -103,7 +100,7 @@ public class CategoriaView extends javax.swing.JPanel {
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setText("PROVEEDORES");
+        jLabel1.setText("CATEGORIAS");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -125,7 +122,7 @@ public class CategoriaView extends javax.swing.JPanel {
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel4.setForeground(new java.awt.Color(153, 153, 153));
 
-        jLabel2.setText("BUSCAR PROVEEDOR");
+        jLabel2.setText("BUSCAR CATEGORIA");
 
         BtnBuscar.setText("Buscar");
 
@@ -236,14 +233,14 @@ public class CategoriaView extends javax.swing.JPanel {
 
         TbTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "ID", "Nombre", "Direccion", "Telefono", "Correo"
+                "ID", "Nombre", "Descripcion"
             }
         ));
         jScrollPane1.setViewportView(TbTabla);

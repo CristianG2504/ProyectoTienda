@@ -13,9 +13,11 @@ import java.util.List;
  *
  * @author joans
  */
+
 public interface CategoriaDao {
 
     List<Categoria> listarTodos() throws Exception;
+    List<Categoria> buscarCategorias(String valor) throws Exception;
 
     Categoria obtenerPorId(int id) throws Exception;
 

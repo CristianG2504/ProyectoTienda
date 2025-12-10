@@ -34,6 +34,10 @@ public class CategoriaController {
         view.btnEliminar.addActionListener(e -> eliminarCategoria());
 
         view.btnLimpiar.addActionListener(e -> limpiarCampos());
+        
+
+view.BtnBuscar.addActionListener(e -> buscarCategoria());
+
 
         view.TbTabla.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
@@ -43,18 +47,18 @@ public class CategoriaController {
         });
     }
 
-    // Cargar tabla de categorías
+  
     public void cargarTabla() {
         try {
             List<Categoria> lista = dao.listarTodos();
 
-            // Crear modelo nuevo
+          
             DefaultTableModel model = new DefaultTableModel();
             model.addColumn("ID");
             model.addColumn("Nombre");
             model.addColumn("Descripción");
 
-            // Agregar filas
+  
             for (Categoria cat : lista) {
                 model.addRow(new Object[]{cat.getId(), cat.getNombre(), cat.getDescripcion()});
             }
@@ -64,8 +68,7 @@ public class CategoriaController {
             JOptionPane.showMessageDialog(view, "Error al cargar categorías: " + ex.getMessage());
         }
     }
-
-    // Agregar categoría
+ 
     private void agregarCategoria() {
         try {
             String nombre = view.txtNombre.getText();
@@ -90,7 +93,7 @@ public class CategoriaController {
         }
     }
 
-    // Actualizar categoría
+    
     private void actualizarCategoria() {
         try {
             int id = Integer.parseInt(view.txtID.getText());
@@ -119,7 +122,7 @@ public class CategoriaController {
         }
     }
 
-    // Eliminar categoría
+
     private void eliminarCategoria() {
         try {
             int id = Integer.parseInt(view.txtID.getText());
@@ -138,15 +141,28 @@ public class CategoriaController {
             JOptionPane.showMessageDialog(view, "Error al eliminar categoría: " + ex.getMessage());
         }
     }
+    
+    private void buscarCategoria() {
 
-    // Limpiar campos
+    String valor = view.txtBuscar.getText(); 
+
+    try {
+        List<Categoria> lista = dao.buscarCategorias(valor);
+        view.cargarTabla(lista); 
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(view, "Error al buscar categoría: " + ex.getMessage());
+    }
+}
+
+
+
     private void limpiarCampos() {
         view.txtID.setText("");
         view.txtNombre.setText("");
         view.txtDescripcion.setText("");
     }
 
-    // Cuando se selecciona una fila de la tabla
+  
     private void filaSeleccionada() {
         int fila = view.TbTabla.getSelectedRow();
         if (fila >= 0) {

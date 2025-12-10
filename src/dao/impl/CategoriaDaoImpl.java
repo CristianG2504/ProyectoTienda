@@ -88,4 +88,32 @@ public class CategoriaDaoImpl implements CategoriaDao {
             return ps.executeUpdate() > 0;
         }
     }
+
+    @Override
+    public List<Categoria> buscarCategorias(String valor) throws Exception {
+       List<Categoria> lista = new ArrayList<>();
+
+    String sql = "SELECT * FROM categoria WHERE "
+            + "nombre LIKE ? OR "
+            + "descripcion LIKE ?";
+
+    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        String v = "%" + valor + "%";
+        ps.setString(1, v);
+        ps.setString(2, v);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Categoria cat = new Categoria();
+            cat.setId(rs.getInt("id"));
+            cat.setNombre(rs.getString("nombre"));
+            cat.setDescripcion(rs.getString("descripcion"));
+            lista.add(cat);
+        }
+    }
+
+    return lista;
+    }
 }

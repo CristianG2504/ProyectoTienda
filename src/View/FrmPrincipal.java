@@ -4,7 +4,9 @@
  */
 package View;
 
+import Controller.CategoriaController;
 import Controller.ProductoController;
+import dao.impl.CategoriaDaoImpl;
 import dao.impl.ProductoDAOImpl;
 import dao.impl.ProveedorDaoImpl;
 import java.sql.SQLException;
@@ -41,6 +43,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         btnProveedores = new javax.swing.JLabel();
+        btnProveedores1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,6 +108,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         jPanel3.add(btnProveedores);
 
+        btnProveedores1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnProveedores1.setForeground(new java.awt.Color(255, 255, 255));
+        btnProveedores1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnProveedores1.setText("CATEGORIAS");
+        btnProveedores1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProveedores1MouseClicked(evt);
+            }
+        });
+        jPanel3.add(btnProveedores1);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -156,6 +170,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel4MouseClicked
 
+    private void btnProveedores1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProveedores1MouseClicked
+     try {
+            this.abrirCategorias();
+        } catch (SQLException ex) {
+            System.getLogger(FrmPrincipal.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+    }//GEN-LAST:event_btnProveedores1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -183,6 +205,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnProveedores;
+    private javax.swing.JLabel btnProveedores1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -221,6 +244,24 @@ private void abrirProveedores() throws SQLException {
                 = new ProductoController(vistaProducto, dao);
 
         jPanel2.add(vistaProducto, java.awt.BorderLayout.CENTER);
+        jPanel2.revalidate();
+        jPanel2.repaint();
+    }
+    
+    
+       private void abrirCategorias() throws SQLException {
+        jPanel2.removeAll();
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+     
+        CategoriaView vistaCategoria = new CategoriaView();
+        CategoriaDaoImpl dao = new CategoriaDaoImpl();
+
+
+        CategoriaController controller
+                = new CategoriaController(vistaCategoria, dao);
+
+        jPanel2.add(vistaCategoria, java.awt.BorderLayout.CENTER);
         jPanel2.revalidate();
         jPanel2.repaint();
     }
