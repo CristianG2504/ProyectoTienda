@@ -16,7 +16,7 @@ import dao.VentaDetalleDao;
 
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+
 
 
 import javax.swing.JFileChooser;
@@ -68,7 +68,7 @@ public class VentaController {
 
         vista.btnAgregar.addActionListener(e -> agregarProducto());
         vista.btnGuardar.addActionListener(e -> guardarVenta());
-        vista.btnXml.addActionListener(e -> generarXML());
+       
 
     }
 
